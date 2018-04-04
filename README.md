@@ -223,7 +223,7 @@ Etant basé sur un système de Template, la valeur peut être modifié en ajouta
 <pre><code>
 kalliope_memory:
   my_saved_key: "{{ neuron_parameter_name }} avec d'autres mots"
-</pre></code>
+</code></pre>
 Ou concaténer plusieurs variables de sortie du neuron dans la même variables en mémoire:
 <pre><code>
 kalliope_memory:
