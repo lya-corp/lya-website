@@ -1,11 +1,12 @@
+<!DOCTYPE html> <html>
 # Lya
 Artificial intelligence
 --
 
-### _*fichier à modifier*_
+### fichier à modifier
 * [brain.yml](https://github.com/floflo2607/Lya/blob/master/brain.yml)
 
-### info complementaires
+### Info complementaires
 * [tout plein de modules](https://bacardi55.org/kalliope.html)
 * [toutes les infos](https://github.com/kalliope-project/kalliope)
 * [toutes les info sur brain](https://github.com/kalliope-project/kalliope/blob/master/Docs/brain.md)
@@ -14,7 +15,7 @@ Artificial intelligence
 * [website](https://kalliope-project.github.io/)
 
 
-### _*voici comment le modifier un module simple*_
+### Voici comment le modifier un module simple
 <pre><code>---
   - name: "<strong>le nom de votre ordre</strong>"
     signals:
