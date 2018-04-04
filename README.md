@@ -180,13 +180,15 @@ Par exemple, je modifie mon synapse pour que cette fois il utilise un fichier de
         file_template: "gouter.j2"
 </code></pre>
 Je créé à présent un fichier gouter.j2 avec le contenu suivant
+
 <pre><code>
-#{% if hours|int() in range(16,17) %}
-#oui il est l'heure
-#{% else %}
-#non pas encore
-#{% endif %}
+"{% if hours|int() in range(16,17) %}"
+"oui il est l'heure"
+"{% else %}"
+"non pas encore"
+"{% endif %}"
 </code></pre>
+
 J’utilise ici le moteur et sa structure de contrôle afin de faire dire à mon bot si il est l’heure du goûter en fonction des variables retournées par le neurones au moment de l’utilisation.
 Jinja propose de multiples structures de contrôles (if, else, boucle for, etc..) vous permettant de créer un nombre illimité de combinaison pour les réponses de vôtre assistant.
 Mise en mémoire de variable avec Kalliope Memory
