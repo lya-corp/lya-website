@@ -26,7 +26,7 @@ Artificial intelligence
            - "<strong>la reponse 1</strong>"
            - "<strong>la reponse 2</strong>"
            .......
-</pre></code>
+</code></pre>
 
 
 # brain.yml: le cerveau de Kalliopé
@@ -44,7 +44,7 @@ Voici un ordre simple:
 <pre><code>
 signals:
     - order: "effectue cette action"
-</pre></code>
+</code></pre>
 Nous allons voir maintenant un ordre avec argument. Les arguments sont important pour améliorer la flexibilité de votre bot.
 Prenons un exemple avec le neuron Wikipédia qui, bien-sur, permet d’effectuer une recherche sur Wikipédia.
 Nous pouvons créer un synapse avec un ordre simple comme ceci
@@ -57,7 +57,7 @@ Nous pouvons créer un synapse avec un ordre simple comme ceci
         language: "fr"        
         query: Obama
         say_template: "résultat de la recherche: {{ summary }}"
-</pre></code>
+</code></pre>
 Le synapse va fonctionner, mais cela revient à coder en dur chaque recherche que l’on voudrait effectuer. Pas franchement top pour impressionner les amis. C’est là qu’interviennent les arguments.
 Modifions notre synapse
 <pre><code>
@@ -69,7 +69,7 @@ Modifions notre synapse
         language: "fr"        
         query: "{{ma_recherche}}"
         say_template: "résultat de la recherche: {{ summary }}"
-</pre></code>
+</code></pre>
 On ajoute un argument à l’ordre. Kalliopé va donc insérer tout ce qui est dit après la phrase “cherche sur wikipédia” dans une variable nommée “ma_recherche”.
 Cette variable est ensuite utilisable dans les paramètres des neurones. Ici je le donne au paramètre “query”, qui est le nom de la page recherchée.
 Les events
@@ -92,7 +92,7 @@ Ce type de signal permet de planifier un événement suivant une fréquence. Par
     - shell: 
         cmd: "mplayer http://192.99.17.12:6410/"
         async: True
-</pre></code>
+</code></pre>
 La liste complète des paramètres utilisables par un event sont dans la documentation.
 Les neurones
 Le dernier point, les neurones. Un neurone est un module, ou plugin, qui va effectuer une action.
@@ -107,7 +107,7 @@ neurons:
   - neuron_name_2:
       parameter1: "value1"
       parameter2: "value2"
-</pre></code>
+</code></pre>
 Paramètres en entrée
 Un neuron demande parfois des paramètres en entrée pour fonctionner. Nous trouverez la liste des paramètres dans la documentation du neurone. Certains sont obligatoires, d’autres optionnels.
 Un paramètre peut être donné directement dans la configuration du synapse en dur comme ici
@@ -120,7 +120,7 @@ Un paramètre peut être donné directement dans la configuration du synapse en 
         bridge_ip: "192.168.0.7"
         group_name:  "couloir"
         state: "on"
-</pre></code>
+</code></pre>
 Ici, les paramètres “bridge_ip”, “group_name” et “state” sont codés en dur dans le synapse.
 Un paramètre peut être récupéré depuis l’ordre comme ceci:
 <pre><code>
@@ -132,7 +132,7 @@ Un paramètre peut être récupéré depuis l’ordre comme ceci:
         bridge_ip: "192.168.0.7"
         group_name:  "{{ group_name }}"
         state: "on"
-</pre></code>
+</code></pre>
 Ou alors récupéré depuis une variable globale comme cela:
 <pre><code>
   - name: "run-simple-sleep"
@@ -141,16 +141,16 @@ Ou alors récupéré depuis une variable globale comme cela:
     neurons:
       - sleep:
           seconds: "{{variable}}"
-</pre></code>
+</code></pre>
 Note importante: Si vous utilisez une variable dans un paramètre, il est obligatoire d’utilisez les doubles guillemets pour encadrer celui-ci.
 Cette syntaxe est fausse:
 <pre><code>
  seconds: {{variable}}
-</pre></code>
+</code></pre>
 Celle-ci est correct:
 <pre><code>
  seconds: "{{variable}}"
-</pre></code>
+</code></pre>
 Paramètres en sortie
 Kalliopé est un framework, cela signifie que c’est un outil pour concevoir votre assistant comme vous le souhaitez.
 Chaque neuron possède sa propre configuration en entrée, et retourne des variables en sortie que vous pouvez utiliser pour concevoir votre réponse.
@@ -165,7 +165,7 @@ On peut donc écrire un synapse avec un template de réponse comme suit:
     - systemdate:
         say_template:
           - "il est {{ hours }} heure et {{ minutes }} minute"
-</pre></code>
+</code></pre>
 Ici, Kalliopé instanciera les valeurs “hours” et “minutes” au moment de l’appel et les transmettra au template “say_template”.
 Ce qui donnera un résultat du genre: “il est 9 heures et 32 minutes”.
 Vous pouvez donc choisir ce que va répondre vôtre bot, et ce dans la langue que vous souhaitez du moment que le moteur TTS gère cette langue.
@@ -178,7 +178,7 @@ Par exemple, je modifie mon synapse pour que cette fois il utilise un fichier de
   neurons:
     - systemdate:
         file_template: "gouter.j2"
-</pre></code>
+</code></pre>
 Je créé à présent un fichier gouter.j2 avec le contenu suivant
 <pre><code>
 {% if hours|int() in range(16,17) %}
@@ -205,7 +205,7 @@ Exemple 1: mise en mémoire de paramètres de sortie d’un neuron.
           kalliope_memory:
             hours_when_asked: "{{ hours }}"
             minutes_when_asked: "{{ minutes }}"
-</pre></code>
+</code></pre>
 Ici, le neuron systemdate génère des variables qui sont données en sortie au template pour faire parler kalliopé et également passés à la mémoire temporaire de Kalliopé.
 La mémoire peut être utilisée dans un autre appel d’un autre synapse comme ceci
 <pre><code>
@@ -216,7 +216,7 @@ La mémoire peut être utilisée dans un autre appel d’un autre synapse comme 
     - say:
         message:
           - "a {{ kalliope_memory['hours_when_asked']}} heures et {{ kalliope_memory['minutes_when_asked']}} minutes"
-</pre></code>
+</code></pre>
 Etant basé sur un système de Template, la valeur peut être modifié en ajoutant d’autres mots  au moment de la mise en mémoire:
 <pre><code>
 kalliope_memory:
@@ -226,7 +226,7 @@ Ou concaténer plusieurs variables de sortie du neuron dans la même variables e
 <pre><code>
 kalliope_memory:
   my_saved_key: "{{ neuron_parameter_name1 }} et {{ neuron_parameter_name2 }}"
-</pre></code>
+</code></pre>
 Exemple 2: mise en mémoire de paramètres capturés dans l’ordre
 
 <pre><code>- name: "synapse-id"
@@ -237,7 +237,7 @@ Exemple 2: mise en mémoire de paramètres capturés dans l’ordre
         message: "bonjour {{ name }}"
         kalliope_memory:
           friend: "{{ name }}"
-</pre></code>
+</code></pre>
 Ici, la variable “name”  est utilisée dans le template au moment de faire parler Kalliopé et est également placée en mémoire sous une variable nommée “friend”.
 On peut par la suite accéder à la mémoire pour faire répéter le nom de nôtre ami
 <pre><code>
@@ -248,7 +248,7 @@ On peut par la suite accéder à la mémoire pour faire répéter le nom de nôt
     - say:
         message:
           - "C'est {{ kalliope_memory['friend'] }} 
-</pre></code>
+</code></pre>
 Un dernier exemple pour comprendre la mécanique de mémoire de Kalliopé. Dans le scénario suivant, on veut que Kalliopé nous rappelle d’appeler nôtre maman dans 15 minutes
 Moi: rappel moi de téléphoner à maman dans 15 minutes 
 Kalliopé: Je vous le rappel dans 15 minutes 
@@ -277,7 +277,7 @@ Voici le brain que l’on peut écrire
       - say:
           message:
             - "Vous m'avez demandé de vous rappeler de {{ kalliope_memory['remember'] }} il y a {{ kalliope_memory['minutes_ago'] }} minutes"
-</pre></code>
+</code></pre>
 
 
 [En savoir plus](https://www.framboise314.fr/kalliope-assistant-personnel-customisable/#HSWJ7mVkAlKU8xEt.99)
