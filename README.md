@@ -181,6 +181,7 @@ Par exemple, je modifie mon synapse pour que cette fois il utilise un fichier de
 </code></pre>
 Je créé à présent un fichier gouter.j2 avec le contenu suivant
 <pre><code>
+
 {% if hours|int() in range(16,17) %}
 oui il est l'heure
 {% else %}
